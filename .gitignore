@@ -1,5 +1,19 @@
+# Main
 bin/
 include/
 lib/
 pyvenv.cfg
 .vscode
+remarkable_addons/__init__.pyc
+# Cache
+remarkable_addons/classes/__pycache__
+remarkable_addons/__pycache__
+# MACOS files
+.DS_Store
+remarkable_addons/.DS_Store
+remarkable_addons/classes/.DS_Store
+# Excluded extensions
+*.png
+*.svg
+*.jpg
+*.pdf
