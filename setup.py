@@ -13,10 +13,10 @@ setup(name='remarkable_addons',
         'tinycss2==1.0.2',
         'webencodings==0.5.1',
       ],
-      packages=['remarkable_addons', 'remarkable_addons.classes'],
+      packages=['src', 'src.classes'],
       entry_points={
           'console_scripts': [
-              'remarkable_addons = remarkable_addons.__main__:main'
+              'remarkable_addons = src.__main__:main'
           ]
       },
       )

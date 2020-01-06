@@ -6,10 +6,14 @@ from xml.dom import minidom
 from reportlab.graphics import renderPDF, renderPM
 from svglib.svglib import svg2rlg
 
+# Custom packages
+from src.classes.utils import utils
+
 class svg_edit:
-    def __init__(self, color, output_path, quality=5):
+    def __init__(self, color, temp_path, quality=5):
+        fun = utils()
         self.color = color
-        self.output_path = output_path
+        self.temp_path = temp_path + fun.check_platform()
         self.original_size = 0
         self.final_size = 0
         self.quality = quality # 0 to 100
@@ -27,27 +31,27 @@ class svg_edit:
             path[0].setAttribute('stroke', self.color)
 
         # Save XML file
-        file_handle = open("new.svg","w")
+        file_handle = open(self.temp_path + "new.svg","w")
         file_handle.write(mydoc.toxml())
-        drawing = svg2rlg("new.svg")
+        drawing = svg2rlg(self.temp_path + "new.svg")
         
         # Save and reduce PNG
-        renderPM.drawToFile(drawing, "new.png", "PNG")
+        renderPM.drawToFile(drawing, self.temp_path + "new.png", "PNG")
         
         # Apply compression
         self.reduce_size()
 
         # Save PDF file
-        file_handle = open(self.output_path + "/" + str(index) + ".pdf", "wb")
-        file_handle.write(img2pdf.convert("resized.jpg"))
-        # renderPDF.drawToFile(drawing, self.output_path + "/" + str(index) + ".pdf")
+        file_handle = open(self.temp_path + str(index) + ".pdf", "wb")
+        file_handle.write(img2pdf.convert(self.temp_path + "resized.jpg"))
+        # renderPDF.drawToFile(drawing, self.temp_path + "/" + str(index) + ".pdf")
     
     def reduce_size(self):
-        self.original_size += os.stat('new.png').st_size
-        picture = Image.open('new.png')
+        self.original_size += os.stat(self.temp_path + 'new.png').st_size
+        picture = Image.open(self.temp_path + 'new.png')
         dim = picture.size
-        picture.save("resized.jpg","JPEG",optimize=True,quality=self.quality) 
-        self.final_size += os.stat(os.path.join(os.getcwd(),"resized.jpg")).st_size
+        picture.save(self.temp_path + "resized.jpg","JPEG",optimize=True,quality=self.quality) 
+        self.final_size += os.stat(os.path.join(os.getcwd(),self.temp_path + "resized.jpg")).st_size
             
     def calc_compression(self):
         percent = (self.original_size-self.final_size)/float(self.original_size)*100

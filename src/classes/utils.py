@@ -1,4 +1,5 @@
 # Load external packages
+import platform
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 class utils:   
@@ -30,3 +31,9 @@ class utils:
             else:
                 print("-- Warning: " + n + " is not valid index")
         return l
+    
+    def check_platform(self):
+        if platform.system() == "Windows":
+            return "\\" # \ is special symbol, needs to be escaped with another \
+        else:
+            return "/"

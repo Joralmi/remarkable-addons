@@ -6,19 +6,19 @@ import tkinter
 from tkinter import filedialog
 
 # Load custom packages
-from remarkable_addons.classes.svg_edit import svg_edit
-from remarkable_addons.classes.measure_time import measure_time
-from remarkable_addons.classes.utils import utils
+from src.classes.svg_edit import svg_edit
+from src.classes.measure_time import measure_time
+from src.classes.utils import utils
 
+# Application entry point
 def main(args=None):
-    # The main routine
-    if args is None:
-        args = sys.argv[1:]
-        print("You need to specify the path where your SVG files are located...")
-        print("Exiting the program now...")
+    # Checking input args
+    # if args is None:
+        # args = sys.argv[1:]
         # sys.exit()
 
     # Process arguments
+    # TBD
 
     # Configuration defaults (Change according to your needs)
     stroke_color = "#FF0000" # default red
@@ -32,7 +32,7 @@ def main(args=None):
     print("Opening folder: " + str(inputs_path))
     
     # Initialize classes
-    timer = measure_time()     # Create timer object to measure elapsed time
+    timer = measure_time()
     update_inputs = svg_edit(stroke_color, outputs_path, quality)
     funcs = utils()
 
