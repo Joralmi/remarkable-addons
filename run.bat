@@ -1,8 +1,4 @@
-REM TO BE DONE
-REM ECHO ON
-REM ECHO Starting ReMarkable edition add-on software...
-REM REM SET PATH=%PATH%;C:\Python27
-REM \env\Scripts\activate
-REM pip install --requirement requirements.txt
-REM python yourscript.py
-REM PAUSE
+ECHO ON
+ECHO Running ReMarkable edition add-on software...
+cmd /k "cd /d Scripts & activate & remarkable_addons.exe & deactivate & cd /d .. & cd /d temp & del *.svg *.png *.jpg *.pdf"
+pause

@@ -51,7 +51,7 @@ def main(args=None):
             print("-- Warning: " + index + " is not valid index")
 
     print(str(num_of_pages) + " PDFs generated, now compiling final PDF")
-    paths = Path(outputs_path).glob('**/*.pdf')
+    paths = Path(funcs.check_platform(outputs_path)).glob('**/*.pdf')
     funcs.pdf_cat(output_pdf_name, funcs.sort_paths(paths, num_of_pages))
     timer.end(num_of_pages)
     update_inputs.calc_compression()

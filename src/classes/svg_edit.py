@@ -13,7 +13,7 @@ class svg_edit:
     def __init__(self, color, temp_path, quality=5):
         fun = utils()
         self.color = color
-        self.temp_path = temp_path + fun.check_platform()
+        self.temp_path = fun.check_platform(temp_path)
         self.original_size = 0
         self.final_size = 0
         self.quality = quality # 0 to 100

@@ -1,5 +1,6 @@
 # Load external packages
 import platform
+import os
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 class utils:   
@@ -18,22 +19,31 @@ class utils:
             for index in range(pdf_reader.getNumPages()):
                 page = pdf_reader.getPage(index)
                 pdf_writer.addPage(page)
-    
-        with open(output_path, 'wb') as fh:
+
+        if platform.system() == "Windows":
+            out = os.path.join(os.getcwd(), os.pardir) + "\\" + output_path
+        else:
+            out = output_path
+            
+        with open(out, 'wb') as fh:
             pdf_writer.write(fh)
 
     def sort_paths(self, x, count):
         l = [None] * count
         for path in x:
-            n = self.get_index(str(path), "/", ".")
+            if platform.system() == "Windows":
+                n = self.get_index(str(path), "\\", ".")
+            else:
+                n = self.get_index(str(path), "/", ".")
+
             if n.isdigit():
                 l[int(n)-1] = str(path)
             else:
                 print("-- Warning: " + n + " is not valid index")
         return l
     
-    def check_platform(self):
+    def check_platform(self, s):
         if platform.system() == "Windows":
-            return "\\" # \ is special symbol, needs to be escaped with another \
+            return os.path.abspath(os.path.join(os.getcwd(), os.pardir)) + "\\" + s + "\\"
         else:
-            return "/"
+            return s + "/"
