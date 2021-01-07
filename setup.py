@@ -5,7 +5,7 @@ setup(name='remarkable_addons',
       install_requires=[
         'cssselect2==0.2.2',
         'img2pdf==0.3.3',
-        'lxml==4.4.2',
+        'lxml==4.6.2',
         'Pillow==7.0.0',
         'PyPDF2==1.26.0',
         'reportlab==3.5.32',
